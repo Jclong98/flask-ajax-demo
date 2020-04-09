@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flask Ajax Demo</title>
+
+    
+    <script type=text/javascript>
+        // creating a jquery constant for wherever the webserver is being run from
+        $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+    </script>
+
+    <!-- importing jquery from a cdn -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <!-- importing chart.js from a cdn -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+
+    <link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}">
+
+</head>
+<body>
+    
+    <div class="card">
+        <!-- 
+            this canvas will be populated by javascript 
+            height and width are preset to make sure that it doesn't 
+            move anything around on the page when the graph is created
+        -->
+        <canvas id="chart" height="800"></canvas>
+    
+        <button id="get-data-btn">Get Data</button>
+    </div>
+
+    <!-- using the flask url_for function to get a script -->
+    <script src="{{url_for('static', filename='createChart.js')}}"></script>
+</body>
+</html>
