@@ -17,15 +17,16 @@
     <!-- importing chart.js from a cdn -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
 
+    <!-- using the flask url_for function to get styles for this page -->
     <link rel="stylesheet" href="{{url_for('static', filename='styles.css')}}">
 
 </head>
 <body>
     
-    <div class="card">
+    <div class="container">
         <!-- 
             this canvas will be populated by javascript 
-            height and width are preset to make sure that it doesn't 
+            height is preset to make sure that it doesn't 
             move anything around on the page when the graph is created
         -->
         <canvas id="chart" height="800"></canvas>
