@@ -75,9 +75,3 @@ function getData() {
         }
     );
 }
-
-// getting the button by its id
-let button = document.getElementById("get-data-btn");
-
-// when the button is clicked, call getData()
-button.addEventListener("click", getData);
