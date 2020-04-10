@@ -2,7 +2,7 @@ import json
 from pprint import pprint
 
 import pandas as pd
-from flask import Flask, jsonify, render_template
+from flask import Flask, jsonify, render_template, request
 
 app = Flask(__name__)
 
@@ -14,7 +14,9 @@ def index():
 # route to only return data to be called with ajax
 @app.route('/_get_data')
 def get_data():
-    df = pd.read_csv("https://cals.arizona.edu/AZMET/data/0620rd.txt", header=None)
+    year = request.args.get("year", "20")
+
+    df = pd.read_csv(f"https://cals.arizona.edu/AZMET/data/06{year}rd.txt", header=None)
     df.columns = [
         'Year', 'DOY', 'Station Num',
         'Air Max', 'Air Min', 'Air Mean',

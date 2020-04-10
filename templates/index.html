@@ -31,7 +31,11 @@
         -->
         <canvas id="chart" height="800"></canvas>
     
-        <button id="get-data-btn" onclick="setTemps('chart')">Get Data</button>
+        <div class="row">
+            <label for="year">Year: 20</label>
+            <input type="text" id="year" placeholder="20" size="2" maxlength="2">
+            <button id="get-data-btn" onclick="setTemps('chart')">Get Data</button>
+        </div>
     </div>
 
     <!-- using the flask url_for function to get a script -->
