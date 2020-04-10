@@ -118,7 +118,8 @@ function setTemps() {
                 }
             };
             
-            Plotly.newPlot('plotly-figure', [traceMin, traceMax], layout);
+            // use Plotly.react to update the figure because it is faster thant Plotly.newPlot
+            Plotly.react('plotly-figure', [traceMin, traceMax], layout);
         }
     );
 }
