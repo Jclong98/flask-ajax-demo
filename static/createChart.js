@@ -33,14 +33,14 @@ function getData() {
                             label: 'Air Min',
                             data: Object.values(data['Air Min']),
                             borderColor: '#7997a1',
-                            backgroundColor: '#add8e6',
+                            backgroundColor: 'transparent',
                             fill:'start', //filling from the very bottom
                         },
                         {
                             label: 'Air Max',
                             data: Object.values(data['Air Max']),
                             borderColor: 'tomato',
-                            backgroundColor: '#ff634770',
+                            backgroundColor: 'transparent',
                             fill:'start', //filling from the very bottom
                         },
                     ]
