@@ -1,9 +1,9 @@
 // building the chart with chart.js
 // get the context of a selected chart canvas
-var ctx = document.getElementById("chart").getContext('2d');
+let ctx = document.getElementById("chartjs-figure").getContext('2d');
 
 // use that context to build a chart.js chart
-var myChart = new Chart(ctx, {
+let myChart = new Chart(ctx, {
     // type of chart
     type: 'line',
 
@@ -36,12 +36,25 @@ var myChart = new Chart(ctx, {
     }
 });
 
+// building a plotly.js chart to be populated
+let layout = {
+    title: "AZMET Min and Max Temperature",
+    xaxis: {
+        title: "Day of Year"
+    },
+    yaxis: {
+        title: "Temperature (C)"
+    }
+}
+
+Plotly.newPlot('plotly-figure', [], layout);
+
 // function to be called when the "Get Data" button is pressed
 // takes an id to a canvas object and sets it to a chartjs chart
 function setTemps() {
     
     // grabbing year from text input
-    var year = document.getElementById("year").value;
+    let year = document.getElementById("year").value;
 
     // this is the actual query to the server using jquery
     $.getJSON(
@@ -59,6 +72,7 @@ function setTemps() {
         // data is a json Object
         function(data) {
             
+            // CHARTJS FIGURE
             // setting labels and datasets in the chart
             myChart.data.labels = Object.values(data['DOY']);
 
@@ -82,6 +96,29 @@ function setTemps() {
 
             // calling update to actually apply the changes
             myChart.update();
+
+            // PLOTLY FIGURE
+            let traceMax = {
+                name: "Air max",
+                x: Object.values(data['DOY']),
+                y: Object.values(data['Air Max']),
+                type: 'scatter',
+                marker: {
+                    color:'tomato'
+                }
+            };
+
+            let traceMin = {
+                name: "Air Min",
+                x: Object.values(data['DOY']),
+                y: Object.values(data['Air Min']),
+                type: 'scatter',
+                marker: {
+                    color:'royalblue'
+                }
+            };
+            
+            Plotly.newPlot('plotly-figure', [traceMin, traceMax], layout);
         }
     );
 }
@@ -90,7 +127,7 @@ function setTemps() {
 setTemps();
 
 // allow the user to press enter on the text input
-var input = document.getElementById("year")
+let input = document.getElementById("year")
 input.addEventListener("keyup", e => {
     if (e.keyCode === 13) {
         document.getElementById("get-data-btn").click();
