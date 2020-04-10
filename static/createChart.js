@@ -53,7 +53,7 @@ function updateChartjs(data) {
         borderColor: 'tomato',
         backgroundColor: 'transparent',
     };
-    
+
     // calling update to actually apply the changes
     myChart.update();
 }
@@ -99,9 +99,10 @@ function updatePlotly(data) {
     Plotly.react('plotly-figure', [traceMin, traceMax], layout);
 }
 
-/**
- * function to be called when the "Get Data" button is pressed 
- * takes an id to a canvas object and sets it to a chartjs chart 
+/** 
+ * called when the "Get Data" button is pressed 
+ * uses jquery.getJSON to send the year to the server and use 
+ * the returned data to update both chart.js and plotly.js figures
 */
 function setTemps() {
     
