@@ -22,9 +22,6 @@ let myChart = new Chart(ctx, {
                     display: true,
                     labelString: 'Temperature (C)'
                 },
-                ticks: {
-                    min: -5,
-                }
             }],
             xAxes: [{
                 scaleLabel: {
@@ -47,7 +44,9 @@ let layout = {
     }
 }
 
-Plotly.newPlot('plotly-figure', [], layout);
+var config = {responsive: true}
+
+Plotly.newPlot('plotly-figure', [], layout, config);
 
 // function to be called when the "Get Data" button is pressed
 // takes an id to a canvas object and sets it to a chartjs chart
