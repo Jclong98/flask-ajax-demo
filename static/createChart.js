@@ -35,7 +35,9 @@ let myChart = new Chart(ctx, {
 
 /** use setTemps returned data to update the chartjs figure */
 function updateChartjs(data) {
+    // setting labels and datasets in the chart
     myChart.data.labels = Object.values(data['DOY']);
+
     // min temps
     myChart.data.datasets[0] = {
         label: 'Air Min',
@@ -43,6 +45,7 @@ function updateChartjs(data) {
         borderColor: 'royalblue',
         backgroundColor: 'transparent',
     };
+
     // max temps
     myChart.data.datasets[1] = {
         label: 'Air Max',
@@ -50,6 +53,7 @@ function updateChartjs(data) {
         borderColor: 'tomato',
         backgroundColor: 'transparent',
     };
+    
     // calling update to actually apply the changes
     myChart.update();
 }
@@ -121,7 +125,6 @@ function setTemps() {
         function(data) {
             
             // CHARTJS FIGURE
-            // setting labels and datasets in the chart
             updateChartjs(data);
 
             // PLOTLY FIGURE
