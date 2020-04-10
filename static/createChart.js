@@ -32,7 +32,7 @@ function getData() {
                         {
                             label: 'Air Min',
                             data: Object.values(data['Air Min']),
-                            borderColor: '#7997a1',
+                            borderColor: 'royalblue',
                             backgroundColor: 'transparent',
                             fill:'start', //filling from the very bottom
                         },
