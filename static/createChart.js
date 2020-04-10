@@ -33,7 +33,28 @@ let myChart = new Chart(ctx, {
     }
 });
 
-// building a plotly.js chart to be populated
+/** use setTemps returned data to update the chartjs figure */
+function updateChartjs(data) {
+    myChart.data.labels = Object.values(data['DOY']);
+    // min temps
+    myChart.data.datasets[0] = {
+        label: 'Air Min',
+        data: Object.values(data['Air Min']),
+        borderColor: 'royalblue',
+        backgroundColor: 'transparent',
+    };
+    // max temps
+    myChart.data.datasets[1] = {
+        label: 'Air Max',
+        data: Object.values(data['Air Max']),
+        borderColor: 'tomato',
+        backgroundColor: 'transparent',
+    };
+    // calling update to actually apply the changes
+    myChart.update();
+}
+
+// building a plotly.js figure to be populated
 let layout = {
     title: "AZMET Min and Max Temperature",
     xaxis: {
@@ -48,8 +69,36 @@ var config = {responsive: true}
 
 Plotly.newPlot('plotly-figure', [], layout, config);
 
-// function to be called when the "Get Data" button is pressed
-// takes an id to a canvas object and sets it to a chartjs chart
+/** use setTemps returned data to update the plotly figure */
+function updatePlotly(data) {
+    let traceMax = {
+        name: "Air max",
+        x: Object.values(data['DOY']),
+        y: Object.values(data['Air Max']),
+        type: 'scatter',
+        marker: {
+            color:'tomato'
+        }
+    };
+
+    let traceMin = {
+        name: "Air Min",
+        x: Object.values(data['DOY']),
+        y: Object.values(data['Air Min']),
+        type: 'scatter',
+        marker: {
+            color:'royalblue'
+        }
+    };
+    
+    // use Plotly.react to update the figure because it is faster thant Plotly.newPlot
+    Plotly.react('plotly-figure', [traceMin, traceMax], layout);
+}
+
+/**
+ * function to be called when the "Get Data" button is pressed 
+ * takes an id to a canvas object and sets it to a chartjs chart 
+*/
 function setTemps() {
     
     // grabbing year from text input
@@ -73,52 +122,10 @@ function setTemps() {
             
             // CHARTJS FIGURE
             // setting labels and datasets in the chart
-            myChart.data.labels = Object.values(data['DOY']);
-
-            // min temps
-            myChart.data.datasets[0] = {
-                label: 'Air Min',
-                data: Object.values(data['Air Min']),
-                borderColor: 'royalblue',
-                backgroundColor: 'transparent',
-                // fill:'start', //filling from the very bottom
-            };
-
-            // max temps
-            myChart.data.datasets[1] = {
-                label: 'Air Max',
-                data: Object.values(data['Air Max']),
-                borderColor: 'tomato',
-                backgroundColor: 'transparent',
-                // fill:'start', //filling from the very bottom
-            };
-
-            // calling update to actually apply the changes
-            myChart.update();
+            updateChartjs(data);
 
             // PLOTLY FIGURE
-            let traceMax = {
-                name: "Air max",
-                x: Object.values(data['DOY']),
-                y: Object.values(data['Air Max']),
-                type: 'scatter',
-                marker: {
-                    color:'tomato'
-                }
-            };
-
-            let traceMin = {
-                name: "Air Min",
-                x: Object.values(data['DOY']),
-                y: Object.values(data['Air Min']),
-                type: 'scatter',
-                marker: {
-                    color:'royalblue'
-                }
-            };
-            
-            // use Plotly.react to update the figure because it is faster thant Plotly.newPlot
-            Plotly.react('plotly-figure', [traceMin, traceMax], layout);
+            updatePlotly(data);
         }
     );
 }
@@ -133,3 +140,5 @@ input.addEventListener("keyup", e => {
         document.getElementById("get-data-btn").click();
     }
 });
+
+
