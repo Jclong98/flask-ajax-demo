@@ -1,5 +1,6 @@
 // function to be called when the "Get Data" button is pressed
-function getData() {
+// takes an id to a canvas object and sets it to a chartjs chart
+function setTemps(id) {
             
     // this is the actual query to the server using jquery
     $.getJSON(
@@ -17,7 +18,7 @@ function getData() {
 
             // building the chart with chart.js
             // get the context of a selected chart canvas
-            var ctx = document.getElementById('chart').getContext('2d');
+            var ctx = document.getElementById(id).getContext('2d');
 
             // use that context to build a chart.js chart
             var myChart = new Chart(ctx, {
@@ -34,14 +35,14 @@ function getData() {
                             data: Object.values(data['Air Min']),
                             borderColor: 'royalblue',
                             backgroundColor: 'transparent',
-                            fill:'start', //filling from the very bottom
+                            // fill:'start', //filling from the very bottom
                         },
                         {
                             label: 'Air Max',
                             data: Object.values(data['Air Max']),
                             borderColor: 'tomato',
                             backgroundColor: 'transparent',
-                            fill:'start', //filling from the very bottom
+                            // fill:'start', //filling from the very bottom
                         },
                     ]
                 },
