@@ -75,12 +75,6 @@ function setTemps() {
 // populate the graph with default data
 setTemps();
 
-// allow the user to press enter on the text input
+// get new data when the dropdown is changed
 let input = document.getElementById("year")
-input.addEventListener("keyup", e => {
-    if (e.keyCode === 13) {
-        document.getElementById("get-data-btn").click();
-    }
-});
-
-
+input.addEventListener("change", setTemps)

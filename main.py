@@ -1,5 +1,6 @@
 import json
 from pprint import pprint
+import datetime
 
 import pandas as pd
 from flask import Flask, jsonify, render_template, request
@@ -9,7 +10,10 @@ app = Flask(__name__)
 # main index page
 @app.route('/')
 def index():
-    return render_template("index.html")
+    # generating a list of possible years to populate a dropdown
+    possible_years = [f"{i:02}" for i in range(int(datetime.datetime.now().strftime("%y")), 2, -1)]
+
+    return render_template("index.html", possible_years=possible_years)
 
 # route to only return data to be called with ajax
 @app.route('/_get_data')
@@ -37,4 +41,5 @@ def get_data():
 
 
 if __name__ == "__main__":
+
     app.run(debug=True)
