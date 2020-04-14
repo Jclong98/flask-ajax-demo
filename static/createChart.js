@@ -43,13 +43,10 @@ function updatePlotly(data) {
 /** 
  * called when the "Get Data" button is pressed 
  * uses jquery.getJSON to send the year to the server and use 
- * the returned data to plotly.js figures
+ * the returned data to plotly.js figure
 */
 function setTemps() {
     
-    // grabbing year from text input
-    let year = document.getElementById("year").value;
-
     // this is the actual query to the server using jquery
     $.getJSON(
 
@@ -58,8 +55,7 @@ function setTemps() {
 
         // arg2: data to be passed from here to the server
         {
-            // if a year exists, use it. else, use 20
-            year: year ? year : "20"
+            year: document.getElementById("year").value
         },
 
         // arg3: function to be called on success
