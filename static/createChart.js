@@ -43,7 +43,7 @@ function updatePlotly(data) {
 /** 
  * called when the "Get Data" button is pressed 
  * uses jquery.getJSON to send the year to the server and use 
- * the returned data to update both chart.js and plotly.js figures
+ * the returned data to plotly.js figures
 */
 function setTemps() {
     
