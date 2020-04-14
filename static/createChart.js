@@ -41,7 +41,6 @@ function updatePlotly(data) {
 }
 
 /** 
- * called when the "Get Data" button is pressed 
  * uses jquery.getJSON to send the year to the server and use 
  * the returned data to plotly.js figure
 */
