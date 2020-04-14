@@ -1,62 +1,3 @@
-// building the chart with chart.js
-// get the context of a selected chart canvas
-let ctx = document.getElementById("chartjs-figure").getContext('2d');
-
-// use that context to build a chart.js chart
-let myChart = new Chart(ctx, {
-    // type of chart
-    type: 'line',
-
-    // data to fill chart
-    data: {},
-
-    // chart styling and behavior options
-    options: {
-        title: {
-            display: true,
-            text: 'AZMET Min and Max Temperature'
-        },
-        scales: {
-            yAxes: [{
-                scaleLabel: {
-                    display: true,
-                    labelString: 'Temperature (C)'
-                },
-            }],
-            xAxes: [{
-                scaleLabel: {
-                    display: true,
-                    labelString: 'Day of Year'
-                }
-            }],
-        }
-    }
-});
-
-/** use setTemps returned data to update the chartjs figure */
-function updateChartjs(data) {
-    // setting labels and datasets in the chart
-    myChart.data.labels = Object.values(data['DOY']);
-
-    // min temps
-    myChart.data.datasets[0] = {
-        label: 'Air Min',
-        data: Object.values(data['Air Min']),
-        borderColor: 'royalblue',
-        backgroundColor: 'transparent',
-    };
-
-    // max temps
-    myChart.data.datasets[1] = {
-        label: 'Air Max',
-        data: Object.values(data['Air Max']),
-        borderColor: 'tomato',
-        backgroundColor: 'transparent',
-    };
-
-    // calling update to actually apply the changes
-    myChart.update();
-}
 
 // building a plotly.js figure to be populated
 let layout = {
@@ -125,9 +66,6 @@ function setTemps() {
         // data is a json Object
         function(data) {
             
-            // CHARTJS FIGURE
-            updateChartjs(data);
-
             // PLOTLY FIGURE
             updatePlotly(data);
         }

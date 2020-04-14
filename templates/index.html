@@ -14,9 +14,6 @@
     <!-- importing jquery from a cdn -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 
-    <!-- importing chart.js from a cdn -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
-
     <!-- importing plotly.js from a cdn -->
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 
@@ -27,20 +24,15 @@
 <body>
     
     <div class="container">
-        <!-- 
-            this canvas will be populated by javascript 
-            height is preset to make sure that it doesn't 
-            move anything around on the page when the graph is created
-        -->
-        <canvas id="chartjs-figure" height="500"></canvas>
         
+        <div id="plotly-figure"></div>
+
         <div class="row">
             <label for="year">Year: 20</label>
             <input type="text" id="year" placeholder="20" size="2" maxlength="2">
             <button id="get-data-btn" onclick="setTemps()">Get Data</button>
         </div>
 
-        <div id="plotly-figure"></div>
     </div>
 
     <!-- using the flask url_for function to get a script -->
